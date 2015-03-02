@@ -64,5 +64,5 @@ if __name__ == "__main__":
 	run_thread = threading.Thread(target=run)
 	run_thread.start()
 
-	app.run(host='0.0.0.0', port=1114, debug=False)
+	app.run(host='0.0.0.0', port=1112, debug=False)
 	
