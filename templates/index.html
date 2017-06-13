@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data_temperature = google.visualization.arrayToDataTable([]);
+        data_temperature.addColumn('string', 'time');
+        data_temperature.addColumn('number','temperature');
+        data_temperature.addRows([
+                {%- for time, num in data_temp %}
+                ['{{ time }}', {{ num }}],
+                {%- endfor %}
+        ]);
+
+
+        var data_humidity = google.visualization.arrayToDataTable([]);
+        data_humidity.addColumn('string', 'time');
+        data_humidity.addColumn('number','humidity');
+        data_humidity.addRows([
+                {%- for time, num in data_humi %}
+                ['{{ time }}', {{ num }}],
+                {%- endfor %}
+        ]);
+
+        var options_temperature = {
+          title: 'temperature(℃)',
+          hAxis: {title: 'Time',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0},
+          colors : ['red', 'red', 'red', 'red']
+        };
+
+        var options_humidity = {
+          title: 'humidity(%)',
+          hAxis: {title: 'Time',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart_temperature = new google.visualization.AreaChart(document.getElementById('chart_temperature_div'));
+        
+        var chart_humidity = new google.visualization.AreaChart(document.getElementById('chart_humidity_div'));
+
+        chart_humidity.draw(data_humidity, options_humidity);
+        chart_temperature.draw(data_temperature, options_temperature);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_temperature_div" style="width: 100%; height: 280px;"></div>
+    <div id="chart_humidity_div" style="width: 100%; height: 280px;"></div>
+    setting humidity : <input id = "set_humidity" ></input>
+    <button id = "submit">submit</button>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script type="text/javascript">
+    var data = document.getElementById('set_humidity'),
+        button = document.getElementById('submit');
+
+    button.addEventListener('click',this.submit.bind(this));
+
+    function submit() {
+      var set_humidity = data.value
+
+      $.ajax({
+        type: "POST",
+        url : 'set_humidity',
+        data : {
+          'data' : set_humidity
+        },
+        success : function(data) {
+          document.getElementById('set_humidity').value = "";
+        }
+      })
+
+    }
+
+  </script>
+</html>
