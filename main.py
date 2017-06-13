@@ -40,7 +40,7 @@ def run():
 		sec = datetime.datetime.now().strftime('%S')
 		sensor.temp_check()
 
-		print "setting humidity : " + set_humidity
+		print set_humidity
 	
 		if sec[1:] == '0' :
 			for i in range(0,23):
@@ -63,5 +63,5 @@ if __name__ == "__main__":
 	run_thread = threading.Thread(target=run)
 	run_thread.start()
 
-	app.run(host='0.0.0.0', port=2229, debug=False)
+	app.run(host='0.0.0.0', port=1111, debug=False)
 	
