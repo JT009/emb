@@ -15,7 +15,9 @@ set_humidity = 60
 @app.route("/", methods=['POST'])
 def test():
 	global set_humidity
-	set_humidity = int(request.form['data'])
+	
+	print request.form['data']
+	##set_humidity = int(request.form['data'])
 
 	return "success"
 
@@ -40,7 +42,7 @@ def run():
 		sec = datetime.datetime.now().strftime('%S')
 		sensor.temp_check()
 
-		print set_humidity
+		print set_humidity sensor.curr_temp sensor.curr_humi
 	
 		if sec[1:] == '0' :
 			for i in range(0,23):
