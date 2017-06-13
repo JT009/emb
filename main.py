@@ -42,7 +42,7 @@ def run():
 		sec = datetime.datetime.now().strftime('%S')
 		sensor.temp_check()
 
-		print set_humidity sensor.curr_temp sensor.curr_humi
+		print set_humidity, sensor.curr_temp, sensor.curr_humi
 	
 		if sec[1:] == '0' :
 			for i in range(0,23):
