@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from sensor import Sensor
 import threading
 import time
@@ -16,8 +16,7 @@ set_humidity = 60
 def test():
 	global set_humidity
 	
-	print request.form['data']
-	##set_humidity = int(request.form['data'])
+	set_humidity = int(request.form['data'])
 
 	return "success"
 
