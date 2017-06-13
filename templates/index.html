@@ -62,13 +62,13 @@
     button.addEventListener('click',this.submit.bind(this));
 
     function submit() {
-      var set_humidity = data.value
+      var setting_humidity = data.value
 
       $.ajax({
         type: "POST",
         url : 'set_humidity',
         data : {
-          'data' : set_humidity
+          'data' : setting_humidity
         },
         success : function(data) {
           document.getElementById('set_humidity').value = "";
